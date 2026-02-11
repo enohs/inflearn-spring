@@ -1,7 +1,7 @@
-package hello.itemservice.web.form;
+package hello.form.web.form;
 
-import hello.itemservice.domain.item.Item;
-import hello.itemservice.domain.item.ItemRepository;
+import hello.form.domain.item.Item;
+import hello.form.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

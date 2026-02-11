@@ -1,10 +1,10 @@
-package hello.itemservice;
+package hello.form;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ItemServiceApplicationTests {
+class FromApplicationTests {
 
 	@Test
 	void contextLoads() {
