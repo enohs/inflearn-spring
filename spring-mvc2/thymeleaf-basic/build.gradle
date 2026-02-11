@@ -6,7 +6,7 @@ plugins {
 
 group = 'hello'
 version = '0.0.1-SNAPSHOT'
-description = 'spring-mvc2-thymeleaf-basic'
+description = 'thymeleaf-basic'
 
 java {
     toolchain {
