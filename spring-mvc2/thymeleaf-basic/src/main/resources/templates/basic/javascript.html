@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 자바스크립트 인라인 사용 전 -->
+<script>
+  // 문자를 인식하지 못함
+  var username = [[${user.username}]];
+  var age = [[${user.age}]];
+  //자바스크립트 내추럴 템플릿 -> 주석은 주석으로 남음
+  var username2 = /*[[${user.username}]]*/ "test username";
+  //객체 -> toString으로 출력
+  var user = [[${user}]];
+</script>
+
+<!-- 자바스크립트 인라인 사용 후 -->
+<script th:inline="javascript">
+  // 스트링은 쌍 따옴표 달아줌
+  var username = [[${user.username}]];
+  var age = [[${user.age}]];
+  //자바스크립트 내추럴 템플릿 -> 주석 안 값으로 치환
+  var username2 = /*[[${user.username}]]*/ "test username";
+  //객체 -> Json으로 변경
+  var user = [[${user}]];
+</script>
+
+<!-- 자바스크립트 인라인 each -->
+<script th:inline="javascript">
+  [# th:each="user, stat : ${users}"]
+  var user[[${stat.count}]] = [[${user}]];
+  [/]
+</script>
+</body>
+</html>

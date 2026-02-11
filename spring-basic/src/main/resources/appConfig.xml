@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!--빈으로 작성하고 안에 클래스 타입, 생성자 등 각각 알맞게 작성해주면
+  AppConfig처럼 작성이 가능하다-->
+  <bean id="memberService" class="hello.springbasic.member.MemberServiceImpl">
+    <constructor-arg name="memberRepository" ref="memberRepository"/>
+  </bean>
+
+  <bean id="memberRepository" class="hello.springbasic.member.MemoryMemberRepository"/>
+
+  <bean id="OrderService" class="hello.springbasic.order.OrderServiceImpl">
+    <constructor-arg name="memberRepository" ref="memberRepository"/>
+    <constructor-arg name="discountPolicy" ref="discountPolicy"/>
+  </bean>
+
+  <bean id="discountPolicy" class="hello.springbasic.discount.RateDiscountPolicy"/>
+</beans>
