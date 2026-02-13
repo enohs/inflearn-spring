@@ -25,7 +25,6 @@ public class ItemValidator implements Validator {
     if (!StringUtils.hasText(item.getItemName())) {
       errors.rejectValue("itemName", "required");
     }
-
     if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
       errors.rejectValue("price", "range", new Object[]{1000, 1000000}, null);
     }
