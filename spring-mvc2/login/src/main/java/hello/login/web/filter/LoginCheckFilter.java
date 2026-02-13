@@ -16,7 +16,7 @@ import org.springframework.util.PatternMatchUtils;
 @Slf4j
 public class LoginCheckFilter implements Filter {
 
-  private static final String[] whiteList = {"/", "/login", "/members/add", "/logout", "/css/*"};
+  private static final String[] whiteList = {"/", "/login", "/members/add", "/logout", "/css/*", "/.well-known/*"};
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
