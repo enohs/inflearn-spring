@@ -43,15 +43,6 @@ public class MemberServiceV3_1 {
     }
   }
 
-  private static void release(Connection con) {
-    try {
-      con.setAutoCommit(true); // 커넥션 풀 고려
-      con.close(); // 자동으로 커넥션 풀에 반납이 됨 -> 다른 사용자가 자동 밋으로 쓸 수 있도록 원상복구
-    } catch (Exception e) {
-      log.info("error", e);
-    }
-  }
-
   private void bizLogic(String fromId, String toId, int money) throws SQLException {
     Member fromMember = memberRepository.findById(fromId);
     Member toMember = memberRepository.findById(toId);
