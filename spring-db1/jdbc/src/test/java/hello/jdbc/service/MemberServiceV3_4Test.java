@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import hello.jdbc.domain.Member;
-import hello.jdbc.repository.MemberRepository;
-import hello.jdbc.repository.MemberRepositoryV5;
+import hello.jdbc.repository.MemberRepositoryV3;
+import java.sql.SQLException;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -19,24 +19,20 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
 /**
- * 예외 누수 문제 해결
- * <p>
- * SQLException 제거
- * <p>
- * MemberRepository 인터페이스 의존
+ * 트랜잭션 - DataSource, transactionManager 자동 등록
  */
 @Slf4j
-@SpringBootTest
-class MemberServiceV4Test {
+@SpringBootTest // @Transactional이 스프링 AOP를 사용한 것이라 스프링이 없으면 정상적으로 동작하지 않음!
+class MemberServiceV3_4Test {
 
   public static final String MEMBER_A = "memberA";
   public static final String MEMBER_B = "memberB";
   public static final String MEMBER_EX = "ex";
 
   @Autowired
-  private MemberRepository memberRepository;
+  private MemberRepositoryV3 memberRepository;
   @Autowired
-  private MemberServiceV4 memberService;
+  private MemberServiceV3_3 memberService;
 
   @TestConfiguration
   static class TestConfig {
@@ -48,20 +44,26 @@ class MemberServiceV4Test {
     }
 
     @Bean
-    MemberRepository memberRepository() {
-      //return new MemberRepositoryV4_1(dataSource);
-      //return new MemberRepositoryV4_2(dataSource);
-      return new MemberRepositoryV5(dataSource);
+    MemberRepositoryV3 memberRepositoryV3() {
+      return new MemberRepositoryV3(dataSource);
     }
 
     @Bean
-    MemberServiceV4 memberServiceV4() {
-      return new MemberServiceV4(memberRepository());
+    MemberServiceV3_3 memberServiceV3_3() {
+      return new MemberServiceV3_3(memberRepositoryV3());
     }
   }
 
+  // 이 코드는 스프링 컨테이너와 전혀 관계가 없기 때문에 제대로 동작하지 않는다
+  /*@BeforeEach
+  void before() {
+    DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+    memberRepository = new MemberRepositoryV3(dataSource);
+    memberService = new MemberServiceV3_3(memberRepository);
+  }*/
+
   @AfterEach
-  void after() {
+  void after() throws SQLException {
     memberRepository.delete(MEMBER_A);
     memberRepository.delete(MEMBER_B);
     memberRepository.delete(MEMBER_EX);
@@ -78,7 +80,7 @@ class MemberServiceV4Test {
 
   @Test
   @DisplayName("정상 이체")
-  void accountTransfer() {
+  void accountTransfer() throws SQLException {
     // given
     Member memberA = new Member(MEMBER_A, 10000);
     Member memberB = new Member(MEMBER_B, 10000);
@@ -100,7 +102,7 @@ class MemberServiceV4Test {
 
   @Test
   @DisplayName("이체 중 예외 발생")
-  void accountTransferEx() {
+  void accountTransferEx() throws SQLException {
     // given
     Member memberA = new Member(MEMBER_A, 10000);
     Member memberEx = new Member(MEMBER_EX, 10000);
@@ -116,6 +118,7 @@ class MemberServiceV4Test {
     Member findMemberA = memberRepository.findById(memberA.getMemberId());
     Member findMemberEx = memberRepository.findById(memberEx.getMemberId());
 
+    // 트랜잭션 안에서 에러가 나면 롤백이 되기 때문에 정상적으로 문제가 해결된 것을 확인할 수 있다
     assertThat(findMemberA.getMoney()).isEqualTo(10000);
     assertThat(findMemberEx.getMoney()).isEqualTo(10000);
   }
