@@ -19,7 +19,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping
+    @RequestMapping
     public String items(@ModelAttribute("itemSearch") ItemSearchCond itemSearch, Model model) {
         List<Item> items = itemService.findItems(itemSearch);
         model.addAttribute("items", items);
