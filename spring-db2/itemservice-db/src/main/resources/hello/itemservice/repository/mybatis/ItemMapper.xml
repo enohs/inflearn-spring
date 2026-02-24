@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  이 위치에 인터페이스 입력-->
+<mapper namespace="hello.itemservice.repository.mybatis.ItemMapper">
+
+  <!-- 각 #은 인터페이스에 정의한 파라미터와 매핑이 된다-->
+  <!-- useGeneratedKeys와 keyProperty가 자동으로 Item 객체 속 id 필드에 값을 넣어준다-->
+  <insert id="save" useGeneratedKeys="true" keyProperty="id">
+    insert into item (item_name, price, quantity)
+    values (#{itemName}, #{price}, #{quantity})
+  </insert>
+
+  <update id="update">
+    update item
+    set item_name=#{updateParam.itemName},
+        price=#{updateParam.price},
+        quantity=#{updateParam.quantity}
+    where id = #{id}
+  </update>
+
+  <!-- resultType의 경우 원래라면 모든 경로를 다 적어줘야 하는데 properties에 설정해뒀기 때문에 클래스 타입만 적어줄 수 있는 것 -->
+  <select id="findById" resultType="Item">
+    select id, item_name, price, quantity
+    from item
+    where id = #{id}
+  </select>
+
+  <select id="findAll" resultType="Item">
+    select id, item_name, price, quantity
+    from item
+    <!-- if에 해당하는 게 하나도 없으면 그냥 태그 없어지고
+    하나라도 해당하는 게 있다면 처음에 오는 and를 where로 바꿔서 사용 -->
+    <where>
+      <if test="itemName != null and itemName != ''">
+        and item_name like concat('%',#{itemName},'%')
+      </if>
+      <if test="maxPrice != null">
+        and price &lt;= #{maxPrice}
+      </if>
+    </where>
+  </select>
+
+</mapper>
+  <!--기본적으로 ItemMapper 인터페이스와 같은 패키지 순서에 위치해 있어야 함
+  근데 xml 파일을 한 곳에 몰고 싶으면 properties를 아래처럼 수정하면 된다
+  mybatis.mapper-location=classpath:mapper/**/*.xml
+  테스트에 있는 properties도 수정 필요-->
