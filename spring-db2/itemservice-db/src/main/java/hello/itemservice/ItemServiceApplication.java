@@ -1,7 +1,7 @@
 package hello.itemservice;
 
-import hello.itemservice.config.JdbcTemplateV3Config;
-import hello.itemservice.config.MyBatisConfig;
+import hello.itemservice.config.JpaConfig;
+import hello.itemservice.config.SpringDataJpaConfig;
 import hello.itemservice.repository.ItemRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Profile;
 //@Import(JdbcTemplateV1Config.class) // 수동 빈등록 클래스로 설정
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV3Config.class)
-@Import(MyBatisConfig.class)
+//@Import(MyBatisConfig.class)
+//@Import(JpaConfig.class)
+@Import(SpringDataJpaConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web") // 서비스와 레포지토리는 수동등록을 위해 컨트롤러 패키지로 스캔 제한
 public class ItemServiceApplication {
 
