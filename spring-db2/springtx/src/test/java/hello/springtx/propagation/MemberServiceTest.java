@@ -159,6 +159,8 @@ class MemberServiceTest {
     String username = "로그예외_outerTxOff_success";
 
     //when : 아예 별도의 커넥션을 만들도록 설정하여 일정 부분 독립적으로 운용
+    // 커넥션을 계속해서 유지한다는 점 인지해야 함
+    // 이런 방법 말고 다른 방법을 사용할 수도 있다
     memberService.joinV2(username);
 
     //then : member 저장, log 롤백
