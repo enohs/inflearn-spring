@@ -1,11 +1,12 @@
 package hello.springadv1.trace.logtrace;
 
 import hello.springadv1.trace.TraceStatus;
+import hello.springadv1.trace.threadlocal.code.ThreadLocalService;
 import org.junit.jupiter.api.Test;
 
-class FieldLogTraceTest {
+class ThreadLocalLogTraceTest {
 
-  FieldLogTrace trace = new FieldLogTrace();
+  ThreadLocalLogTrace trace = new ThreadLocalLogTrace();
 
   @Test
   void begin_end_level2() {
