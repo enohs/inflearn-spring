@@ -1,7 +1,7 @@
-package hello.springadv1.proxy.logtrace;
+package hello.springadv1.proxy.trace.logtrace;
 
-import hello.springadv1.proxy.TraceId;
-import hello.springadv1.proxy.TraceStatus;
+import hello.springadv1.proxy.trace.TraceId;
+import hello.springadv1.proxy.trace.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

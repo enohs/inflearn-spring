@@ -1,6 +1,6 @@
-package hello.springadv1.proxy.logtrace;
+package hello.springadv1.proxy.trace.logtrace;
 
-import hello.springadv1.proxy.TraceStatus;
+import hello.springadv1.proxy.trace.TraceStatus;
 
 public interface LogTrace {
 
