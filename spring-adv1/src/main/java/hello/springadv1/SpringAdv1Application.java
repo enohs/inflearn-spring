@@ -1,11 +1,12 @@
 package hello.springadv1;
 
 import hello.springadv1.proxy.config.AppV1Config;
+import hello.springadv1.proxy.config.AppV2Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-@Import(AppV1Config.class)
+@Import({AppV1Config.class, AppV2Config.class})
 @SpringBootApplication(scanBasePackages = {"hello.springadv1.advanced", "hello.springadv1.proxy.app.v3"})
 public class SpringAdv1Application {
 

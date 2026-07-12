@@ -1,3 +1,14 @@
 spring:
   application:
     name: spring-adv1
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: TRACE
