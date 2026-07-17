@@ -1,17 +1,25 @@
 package hello.springadv1;
 
-import hello.springadv1.proxy.config.AppV1Config;
-import hello.springadv1.proxy.config.AppV2Config;
+import hello.springadv1.proxy.config.v1_proxy.InterfaceProxyConfig;
+import hello.springadv1.proxy.trace.logtrace.LogTrace;
+import hello.springadv1.proxy.trace.logtrace.ThreadLocalLogTrace;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-@Import({AppV1Config.class, AppV2Config.class})
+//@Import({AppV1Config.class, AppV2Config.class})
+@Import(InterfaceProxyConfig.class)
 @SpringBootApplication(scanBasePackages = {"hello.springadv1.advanced", "hello.springadv1.proxy.app.v3"})
 public class SpringAdv1Application {
 
   public static void main(String[] args) {
     SpringApplication.run(SpringAdv1Application.class, args);
+  }
+
+  @Bean
+  public LogTrace logTraceProxy() {
+    return new ThreadLocalLogTrace();
   }
 
 }
