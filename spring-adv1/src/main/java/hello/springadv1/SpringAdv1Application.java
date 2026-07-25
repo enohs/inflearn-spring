@@ -1,7 +1,7 @@
 package hello.springadv1;
 
-import hello.springadv1.proxy.config.v1_proxy.ConcreteProxyConfig;
-import hello.springadv1.proxy.config.v1_proxy.InterfaceProxyConfig;
+import hello.springadv1.proxy.config.v2_dynamicproxy.DynamicProxyBasicConfig;
+import hello.springadv1.proxy.config.v2_dynamicproxy.DynamicProxyFilterConfig;
 import hello.springadv1.proxy.trace.logtrace.LogTrace;
 import hello.springadv1.proxy.trace.logtrace.ThreadLocalLogTrace;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
 //@Import({AppV1Config.class, AppV2Config.class})
-@Import({InterfaceProxyConfig.class, ConcreteProxyConfig.class})
+//@Import({InterfaceProxyConfig.class, ConcreteProxyConfig.class})
+//@Import(DynamicProxyBasicConfig.class)
+@Import(DynamicProxyFilterConfig.class)
 @SpringBootApplication(scanBasePackages = {"hello.springadv1.advanced", "hello.springadv1.proxy.app.v3"})
 public class SpringAdv1Application {
 
