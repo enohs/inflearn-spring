@@ -13,7 +13,8 @@ public class TimeAdvice implements MethodInterceptor {
     log.info("TimeProxy 실행");
     long startTime = System.currentTimeMillis();
 
-    // Object result = method.invoke(target, args); // 타겟은 Proxy Factory가 MethodInvocation 안에 넣어줌
+    // Object result = method.invoke(target, args);
+    // 타겟은 Proxy Factory가 MethodInvocation 안에 넣어줌
     Object result = invocation.proceed(); // 알아서 타겟을 찾아 호출해줌
 
     long endTime = System.currentTimeMillis();
