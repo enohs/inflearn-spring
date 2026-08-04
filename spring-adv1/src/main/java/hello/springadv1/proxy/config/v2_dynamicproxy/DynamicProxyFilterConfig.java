@@ -6,7 +6,6 @@ import hello.springadv1.proxy.app.v1.OrderRepositoryV1;
 import hello.springadv1.proxy.app.v1.OrderRepositoryV1Impl;
 import hello.springadv1.proxy.app.v1.OrderServiceV1;
 import hello.springadv1.proxy.app.v1.OrderServiceV1Impl;
-import hello.springadv1.proxy.config.v2_dynamicproxy.handler.LogTraceBasicHandler;
 import hello.springadv1.proxy.config.v2_dynamicproxy.handler.LogTraceFilterHandler;
 import hello.springadv1.proxy.trace.logtrace.LogTrace;
 import java.lang.reflect.Proxy;
