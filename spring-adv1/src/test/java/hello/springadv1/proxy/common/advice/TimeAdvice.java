@@ -5,6 +5,8 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.jspecify.annotations.Nullable;
 
+// aopalliance의 MethodInterceptor는 JDK 동적 프록시가 아닌 Advice를 상속받은 인터페이스.
+// Advice는 프록시가 어떤 동작을 할 것인지를 작성한다.
 @Slf4j
 public class TimeAdvice implements MethodInterceptor {
 
