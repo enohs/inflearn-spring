@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
 //@Import(BeanPostProcessorConfig.class)
 //@Import(AutoProxyConfig.class)
 @Import(AopConfig.class)
-@SpringBootApplication(scanBasePackages = {"hello.springadv1.advanced", "hello.springadv1.proxy.app.v3"})
+@SpringBootApplication(scanBasePackages = {"hello.springadv1.advanced", "hello.springadv1.proxy.app.v3", "hello.springadv1.aop"})
 public class SpringAdv1Application {
 
   public static void main(String[] args) {
