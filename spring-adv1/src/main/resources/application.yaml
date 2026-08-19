@@ -3,6 +3,9 @@ spring:
     name: spring-adv1
 #  aop:
 #    proxy-target-class: false # jdk proxy
+  main:
+    allow-circular-references: true
+
 
 logging:
   level:
