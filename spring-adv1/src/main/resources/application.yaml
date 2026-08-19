@@ -1,6 +1,8 @@
 spring:
   application:
     name: spring-adv1
+#  aop:
+#    proxy-target-class: false # jdk proxy
 
 logging:
   level:
