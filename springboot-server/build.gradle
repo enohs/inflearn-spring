@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'org'
+version = '0.0.1-SNAPSHOT'
+description = 'springboot-server'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
