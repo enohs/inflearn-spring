@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+group = 'org'
+version = '0.0.1-SNAPSHOT'
+description = 'springboot-embed'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework:spring-webmvc:7.0.8'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.24'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// 일반 JAR 생성
+tasks.register('buildJar', Jar) {
+    manifest {
+        attributes 'Main-Class': 'org.embed.EmbedTomcatSpringMain'
+    }
+    with jar
+}
+
+// Fat Jar 생성
+tasks.register('buildFatJar', Jar) {
+    manifast {
+        attributes 'Main-Class': 'org.embed.EmbedTomcatSpringMain'
+    }
+    duplicatesStrategy = DuplicatesStrategy.WARN
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree() } }
+    with jar
+}
