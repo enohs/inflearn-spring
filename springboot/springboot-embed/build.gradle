@@ -35,10 +35,10 @@ tasks.register('buildJar', Jar) {
 
 // Fat Jar 생성
 tasks.register('buildFatJar', Jar) {
-    manifast {
+    manifest {
         attributes 'Main-Class': 'org.embed.EmbedTomcatSpringMain'
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
-    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree() } }
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
