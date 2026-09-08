@@ -1,10 +1,10 @@
-package org.embed;
+package hello.embed;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
-import org.servlet.HelloServlet;
+import hello.servlet.HelloServlet;
 
 public class EmbedTomcatServletMain {
 

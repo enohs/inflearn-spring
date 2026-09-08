@@ -1,4 +1,4 @@
-package org.servlet;
+package hello.servlet;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
