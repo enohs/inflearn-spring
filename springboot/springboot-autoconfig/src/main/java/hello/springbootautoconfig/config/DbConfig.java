@@ -10,7 +10,7 @@ import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.transaction.TransactionManager;
 
 @Slf4j
-@Configuration
+@Configuration // 해당 어노테이션을 주석처리해도 아래의 클래스들은 스프링이 자동구성해준다
 public class DbConfig {
 
   @Bean
