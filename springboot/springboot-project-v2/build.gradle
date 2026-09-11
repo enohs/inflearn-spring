@@ -26,6 +26,9 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // 자동 구성 라이브러리 임포트 (자동 구성에 의해 별도 구성 필요 없이 스프링이 자동으로 등록해줌)
+    implementation files('libs/springboot-memory-v2.jar')
 }
 
 tasks.named('test') {
